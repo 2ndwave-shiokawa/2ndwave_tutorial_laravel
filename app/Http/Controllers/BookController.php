@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog;
+use App\Models\Book;
 use App\Models\User;
 
-class BlogController extends Controller
+class BookController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,47 +25,45 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::paginate(5);
-        
-        return view('blogs.index', compact('blogs'));
+        $books = Book::query()->paginate(5);
+
+        return view('books.index', compact('books'));
     }
 
     public function show($id)
     {
-        $blog = Blog::find($id);
+        $book = Book::find($id);
 
-        return view('blogs.show', compact('blog'));
+        return view('books.show', compact('book'));
     }
 
     public function create()
     {
-        $users = User::query()->get();
         
-        return view('blogs.create', compact('users'));
+        return view('books.create');
     }
 
     public function store(Request $request)
     {
-        $data = $request->blog;
+        $data = $request->book;
+       
 
-        Blog::create([
+        Book::create([
            'title'           => $data['title'],
-           'content'         => $data['content'],
-           'created_user_id' => $data['created_user_id'],
-           'created_at'      => $data['created_at'],
-           'updated_at'      => $data['updated_at'],
+           'author'         => $data['author'],
+           'issue_date' => $data['issue_date'],
+           'synopsis'      => $data['synopsis'],
+           'publisher'      => $data['publisher'],
         ]);
 
-        $this->success('messages.success.created', ['name' => 'ブログ']);
-
-        return redirect('blogs');
+        return redirect('books');
     }
 
     public function edit($id)
     {
-        $blog = Blog::find($id);
+        $book = Book::find($id);
 
-        return view('blogs.edit', compact('blog'));
+        return view('books.edit', compact('book'));
     }
 
     public function update(Request $request, $id)
@@ -79,10 +77,7 @@ class BlogController extends Controller
            'created_user_id' => $data['created_user_id'],
            'created_at'      => $data['created_at'],
            'updated_at'      => $data['updated_at'],
-           
         ]);
-
-        $this->success('messages.success.updated', ['name' => 'ブログ']);
 
         return redirect("blogs/$blog->id");
     }
@@ -91,8 +86,6 @@ class BlogController extends Controller
     {
         $blog = Blog::find($id);
         $blog->delete();
-
-        $this->success('messages.success.deleted', ['name' => 'ブログ']);
         
         return redirect('blogs');
     }    

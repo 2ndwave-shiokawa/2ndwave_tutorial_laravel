@@ -23,6 +23,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('blogs', App\Http\Controllers\BlogController::class);
 
+
+Route::resource('books', App\Http\Controllers\BookController::class);
+
 // Route::get('blogs', function() {
 //    return view('blogs');
 // });

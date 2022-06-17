@@ -18,4 +18,9 @@ class Blog extends Model
         'ceated_at',
         'updated_at',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_user_id');
+    }
 }

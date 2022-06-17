@@ -9,31 +9,46 @@
                     タイトル
                 </div>
                 <div class="col-md-8 border">
-                    {{ $blog->title }}
+                    {{ $book->title }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 border bg-info text-center">
-                    内容
+                    著者
                 </div>
                 <div class="col-md-8 border">
-                    {{ $blog->content }}
+                    {{ $book->author }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 border bg-info text-center">
-                    作成者
+                    発行日
                 </div>
                 <div class="col-md-8 border">
-                    {{ $blog->user ? $blog->user->name : '' }} 
+                    {{ $book->issue_date }}
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-4 border bg-info text-center">
+                    あらすじ
+                </div>
+                <div class="col-md-8 border">
+                    {{ $book->synopsis }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 border bg-info text-center">
+                    出版社
+                </div>
+                <div class="col-md-8 border">
+                    {{ $book->publisher }}
+                </div>
+            </div><div class="row">
                 <div class="col-md-4 border bg-info text-center">
                     作成日
                 </div>
                 <div class="col-md-8 border">
-                    {{ $blog->created_at }}
+                    {{ $book->timestamps }}
                 </div>
             </div>
             <div class="row">
@@ -41,19 +56,19 @@
                     更新日
                 </div>
                 <div class="col-md-8 border">
-                    {{ $blog->updated_at }}
+                    {{ $book->softDeletes }}
                 </div>
             </div>
         </div>
     </div>
     <div class="mt-2 d-flex">
-        <a href="/blogs" class='btn btn-info me-2'>
+        <a href="/books" class='btn btn-info me-2'>
             一覧に戻る
         </a>
-        <a href="/blogs/{{$blog->id}}/edit" class="btn btn-warning me-2">
+        <a href="/books/{{$book->id}}/edit" class="btn btn-warning me-2">
             編集
         </a>
-        <form action="/blogs/{{$blog->id}}" method='post'>
+        <form action="/books/{{$book->id}}" method='post'>
             @method('DELETE')
             @csrf
             <button type="submit" class="btn btn-danger">削除</button>

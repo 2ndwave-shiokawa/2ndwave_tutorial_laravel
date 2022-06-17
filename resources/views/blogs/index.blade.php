@@ -27,7 +27,7 @@
                             <th scope="row">{{ $blog->id }}</th>
                             <td>{{ $blog->title }}</td>
                             <td>{{ $blog->content }}</td>
-                            <td>{{ $blog->created_user_id }}</td>
+                            <td>{{ $blog->user ? $blog->user->name : '' }}</td>
                             <td>{{ $blog->created_at }}</td>
                             <td>{{ $blog->updated_at }}</td>
                             <td>
